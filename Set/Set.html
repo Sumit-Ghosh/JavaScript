@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Implementation of sets in javascript</title>
+    </head>
+    <body>
+        <script>
+            // set class
+            class Set{
+
+                // constructor
+                // intializing items object
+                constructor(){
+                    this.items = {};
+                }
+                
+                // finds whether a given value 
+                // is present in the items object
+                has(value)
+                {
+                    // returns true if "value"
+                    // is present in the "items"
+                    return value in this.items;
+                }
+
+                // it adds the given value to the 
+                // object
+                add(value)
+                {
+                    // check whether the value is already 
+                    // in the object or not
+                    if(!this.has(value))
+                    {
+                        // add value to the object
+                        // both property and value of 
+                        // object is initialized with 
+                        // given value
+                        this.items[value] = value;
+                        return true; 
+                    }
+                    return false;
+                }
+
+                // it removes the given value from the 
+                // object
+                remove(value)
+                {
+                    // check whether the value is in 
+                    // the object
+                    if(this.has(value))
+                    {
+                        // delete both property an value 
+                        // of the given data
+                        delete this.items[value];
+                        return true;
+                    }
+                    return false;
+                }
+
+                // clears the set
+                clear()
+                {
+                    // intialize to null
+                    this.items = {};
+                }
+
+                // returns the size of set
+                size()
+                {
+                    return Object.keys(this.items).length;
+                }
+
+                // returns the values in the set
+                values()
+                {
+                    return Object.keys(this.items);
+                }
+
+                // Perform union operation between 
+                // called set and otherSet
+                union(otherSet)
+                {
+                    // creating new set to store union
+                    var unionSet = new Set();
+
+                    // get all the values of set
+                    // on which this method is called
+                    var value = this.values();
+
+                    // iterate over the values and add 
+                    // it to unionSet
+                    for (var i = 0; i< value.length; i++)
+                        unionSet.add(value[i]);
+
+
+                    // get al the values of otherSet
+                    value = otherSet.values();
+
+                    // iterate over the values and add it to 
+                    // the unionSet
+                    for(var i = 0; i< value.length; i++)
+                        unionSet.add(value[i]);
+
+                    // return the values of unionSet
+                    return unionSet.values();
+                }
+
+
+                // Performs intersection operation between
+                // called set and otherSet
+                intersection(otherSet)
+                {
+                    // creating new set to store intersection
+                    var intersectionSet = new Set();
+
+                    // get all the values of set
+                    // on which this method is called
+                    var value = this.values();
+
+                    // Iterate over the values 
+                    for(var i = 0; i < value.length; i++)
+                    {
+                        // if the other set contains a 
+                        // similar value as of value[i]
+                        // then add it to intersectionSet
+                        if(otherSet.has(value[i]))
+                            intersectionSet.add(value[i]);
+                    }
+
+                    // return values of intersectionSet
+                    return intersectionSet.values();                
+                }
+
+                // Performs difference operation between
+                // called set and otherSet
+                difference(otherSet)
+                {
+                    // creating new set to store differnce
+                    var differenceSet = new Set();
+
+                    
+                    // get all the values of set
+                    // on which this method is called
+                    var value = this.values();
+
+                    // iterate over the values
+                    for(var i = 0; i < value.length; i++)
+                    {
+                        // if the value[i] is not present 
+                        // in otherSet add to the differenceSet
+                        if(!otherSet.has(value[i]))
+                            differenceSet.add(value[i]);
+                    }
+
+                    // returns values of differenceSet
+                    return differenceSet.values();
+                }
+            }
+
+            // creating a set object
+            var s = new Set(); 
+
+            // add elements to the set s
+            s.add(30);
+            s.add(20);
+            s.add(10);
+            s.add(50);
+            s.add(70);
+            s.add(60);
+            
+            // prints true
+            console.log(s.has(60));
+
+            // prints 
+            // ["10", "20", "30", "50", "60", "70"]
+            console.log(s.values());
+
+            // prints true
+            console.log(s.remove(10));
+
+            // prints
+            // ["20", "30", "50", "60", "70"]
+            console.log(s.values());
+
+            // prints 5
+            console.log(s.size());
+
+            // creating another set s1
+            var s1  = new Set(); 
+
+            // adding elements to the set s1
+            s1.add(40);
+            s1.add(20);
+            s1.add(30);
+            s1.add(50);
+            s1.add(60);
+
+            // prints
+            // ["20", "30", "40", "50", "60", "70"]
+            console.log(s.union(s1));
+
+            // prints
+            // ["20", "30", "50", "60"]
+            console.log(s.intersection(s1));
+            
+            // prints
+            // ["70"]
+            console.log(s.difference(s1));
+            
+        </script>
+    </body>
+</html>
