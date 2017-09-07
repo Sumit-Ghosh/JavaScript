@@ -1,0 +1,5 @@
+Codes:
+  HashTable.js - Implementation and using HashTable
+  HashTable.html - Running the script
+  SeperateChaining.js - Implemenation of Hast Table using Seperate Chaining in order to avoid collision
+  SeperateChaining.html - Running the script
